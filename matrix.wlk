@@ -24,8 +24,7 @@ method esElegido() =false
 }
 object nave {
   const pasajeros=[morfeo, trinity, neo]
-
-  method cantidadPasajeros()= pasajeros.size()
+  method pasajeros() =pasajeros 
   method pasajeroMaxVitalidad()= pasajeros.max({p=>p.vitalidad()})
   method estaEquilibradoEnVitalidad() =  self.pasajeroMaxVitalidad() 
                                 <= 
@@ -33,7 +32,17 @@ object nave {
   method pasajeroMinVitalidad()= pasajeros.min({p=>p.vitalidad()})
 
 method elegidoEstaEnNave()= pasajeros.any({p=>p.esElegido()})
-method chocar()= pasajeros.forEach({p=>p.saltar() and self.salirDeLaNave()})
-method acelerar()= pasajeros.forEach({p=>p.saltar()})
-method salirDeLaNave()= pasajeros.clear()
+method chocar()= pasajeros.forEach({p=>p.saltar() self.bajarUnPasajero(p)})
+method acelerar()= pasajeros.filter({p=>not p.esElegido() self.saltarDeAlegria()}) //pasajeros.filter({p=>not p.esElegido()}).forEach({p=>p.saltar()})
+method saltarDeAlegria() =pasajeros.forEach({p=>p.saltar()})
+method saltaryBajarAlElegido(unPasajero) {unPasajero.saltar()
+self.bajarAlElegido(unPasajero)}
+
+ 
+
+method bajarAlElegido(unPasajero)= if (unPasajero.esElegido()){pasajeros.remove(unPasajero)}else{}
+method bajarUnPasajero(unPasajero)= pasajeros.remove(unPasajero)
+  method agregarPasajero(unPasajero) =pasajeros.add(unPasajero)
+  method sacarAtodosLosPasajeros() =pasajeros.clear()   
+  method cantidadPasajeros()= pasajeros.size()
 }
